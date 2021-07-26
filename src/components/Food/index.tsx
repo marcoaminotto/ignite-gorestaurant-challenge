@@ -4,10 +4,23 @@ import { Container } from './styles';
 import api from '../../services/api';
 import { useState } from 'react';
 
-export function Food({ food, handleEditFood, handleDelete }) {
-  const [isAvailable, setIsAvailable] = useState(
-    Object.keys(food).length === 0
-  );
+type FoodType = {
+  available: boolean;
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: string;
+};
+
+interface FoodProps {
+  food: FoodType;
+  handleEditFood: (food: FoodType) => void;
+  handleDelete: (id: number) => void;
+}
+
+export function Food({ food, handleEditFood, handleDelete }: FoodProps) {
+  const [isAvailable, setIsAvailable] = useState(food.available);
 
   const toggleAvailable = async () => {
     await api.put(`/foods/${food.id}`, {
