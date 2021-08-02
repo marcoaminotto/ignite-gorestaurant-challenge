@@ -5,11 +5,20 @@ import { Form } from './styles';
 import { Modal } from '../Modal';
 import Input from '../Input';
 
+type FoodType = {
+  available: boolean;
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: string;
+};
+
 interface ModalEditFoodProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  editingFood: () => void;
-  handleUpdateFood: (food: {}) => Promise<void>;
+  editingFood: {};
+  handleUpdateFood: (food: FoodType) => Promise<void>;
 }
 
 export function ModalEditFood({
@@ -20,7 +29,7 @@ export function ModalEditFood({
 }: ModalEditFoodProps) {
   const formRef = useRef(null);
 
-  const handleSubmit = async (data: {}) => {
+  const handleSubmit = async (data: FoodType) => {
     handleUpdateFood(data);
     setIsOpen();
   };

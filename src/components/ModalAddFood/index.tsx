@@ -5,16 +5,29 @@ import { Modal } from '../Modal';
 import Input from '../Input';
 import { Form } from './styles';
 
+type AddFoodType = {
+  available: boolean;
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: string;
+};
+
 interface ModalAddFoodProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleAddFood: (food: {}) => Promise<void>;
+  handleAddFood: (food: AddFoodType) => Promise<void>;
 }
 
-export function ModalAddFood({ isOpen, setIsOpen, handleAddFood }: ModalAddFoodProps) {
+export function ModalAddFood({
+  isOpen,
+  setIsOpen,
+  handleAddFood,
+}: ModalAddFoodProps) {
   const formRef = useRef(null);
 
-  const handleSubmit = async (data:{}) => {
+  const handleSubmit = async (data: AddFoodType) => {
     handleAddFood(data);
     setIsOpen();
   };
